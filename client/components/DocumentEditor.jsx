@@ -38,9 +38,17 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
   return (
     <div className='doc-editor'>
       {openPicker && <FilePicker fileList={fileList} setDocument={setDocument} />}
-      {hostView && !openPicker && <Button onClick={() => connectAuth()}>Choose a Google Drive File</Button>}
+
+      {hostView && !openPicker && <Button onClick={() => connectAuth()}>
+      Document Manager
+      </Button>}
+      
       <FileUpload updateRoom={updateRoom}/>
-      <Dropdown setActiveDocumentHandler={setActiveDocumentHandler} documents={documents} deleteFile={deleteFile}/>
+      <Dropdown 
+        setActiveDocumentHandler={setActiveDocumentHandler}
+        documents={documents}
+        deleteFile={deleteFile}
+      />
     </div>
   );
 }

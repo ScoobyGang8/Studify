@@ -110,7 +110,7 @@ usersController.deleteUser = async (req, res, next) => {
 
     if (deleteDoc.rooms.length > 0) {
       
-      for await (const subject of ['math', 'english', 'histoy', 'science', 'languages', 'miscellaneous', 'all']) {
+      for await (const subject of ['math', 'english', 'history', 'science', 'languages', 'miscellaneous', 'all']) {
         await redisClient.set(`getAllRooms${subject}`, 'fetchAgain');
       }
     }

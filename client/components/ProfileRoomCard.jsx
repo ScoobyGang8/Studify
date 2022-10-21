@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import RoomEditor from './RoomEditorModal';
 
 function ProfileRoomCard({ fetchUser, info, files, setRoomCookie, roomId }) {
   const [editRoomModal, setModal] = useState(false);
 
+  const navigate = useNavigate();
   // create function to delete card via delete req and update room list (to be drilled down to Room)
   const deleteRoom = async (id) => {
     const deleted = await fetch(`/api/rooms/${id}`, {
@@ -29,7 +30,12 @@ function ProfileRoomCard({ fetchUser, info, files, setRoomCookie, roomId }) {
       <p><label>Subject: </label>{info.subject}</p>
       <p><label>Restricted: </label>{info.restricted ? 'Yes' : 'No'}</p>
       <p><label>Allowed users: </label></p>
-      <Link to='/main/room' state={{ info }}><Button variant='contained' id="open-room-btn" onClick={async() => await setRoomCookie(roomId)}>Open Room</Button></Link>
+      {/* <Link to='/main/room' state={{ info }}> */}
+        <Button variant='contained' id="open-room-btn" onClick={() => {
+        setRoomCookie(roomId);
+        setTimeout(() => navigate('/main/room'), 500);
+      }}>Open Room</Button>
+      {/* </Link> */}
 
       <Button
         variant='outlined'

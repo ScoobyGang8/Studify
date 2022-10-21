@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Chatbox from '../components/Chatbox';
 import DocumentEditor from '../components/DocumentEditor';
 import SelectedDocument from '../components/SelectedDocument';
+import { io } from 'socket.io-client';
 import axios from 'axios';
 
 function Room( ) {
@@ -11,6 +12,7 @@ function Room( ) {
   const [info, setInfo] = useState({});//room info
   const [activeDocument, setActiveDocument] = useState('');
   const [activeURL, setActiveURL] = useState('');
+  const [socket, setSocket] = useState(null);
 
   const state = useLocation().state;
 
@@ -97,9 +99,29 @@ function Room( ) {
     }
   }, [info]);
 
+  useEffect(() => {
+    const newSocket = io('http://localhost:3000');
+
+    newSocket.on('connect', () => {
+      console.log('ROOM COMPONENT SOCKET ', newSocket.id);
+      if (info._id) newSocket.emit('join_room', info._id);
+    });
+
+    newSocket.on('connect_error',  (err) => {
+      console.log(err.message);
+    });
+
+    setSocket(newSocket);
+
+    return () => {
+      console.log('Closing room socket');
+      newSocket.close();
+    };
+  }, [info]);
+
   // console.log('ROOM COMPONENT STATE', state);
   // console.log('ROOM COMPONENT INFO', info);
-  // console.log('ROOM COMPONENT HOSTINFO', hostInfo);
+  console.log('ROOM COMPONENT HOSTINFO', hostInfo);
   // console.log('ROOM COMPONENT HOST VIEW ', hostView);
 
   const deleteFile = async (selectedDocument) => {
@@ -125,7 +147,7 @@ function Room( ) {
   return (
     <div className="room-page">
       <div id='room-page-info'>
-        <h2>Host: {info.host && (info.host.nickname || hostInfo.nickname)} </h2>
+        <h2>Host: {info?.host && (info?.host?.nickname || hostInfo.nickname)} </h2>
       </div>
       {hostView && 
       <DocumentEditor 
@@ -136,7 +158,7 @@ function Room( ) {
         deleteFile = {deleteFile}
       />}
       {(activeDocument && activeURL) && <SelectedDocument document={activeDocument} activeURL={activeURL}/>}
-      <Chatbox />
+      <Chatbox roomId={info._id} socket={socket} nickname={hostInfo.nickname}/>
     </div>
   );
 }

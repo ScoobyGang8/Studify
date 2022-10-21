@@ -21,9 +21,24 @@ const FileUpload = ({ updateRoom }) => {
   };
 
   return (
-    <form id="file-form" onSubmit={submit} >
-      <input id="file-upload" type="file" name="file" onChange={e => setFile(e.target.files[0])}/>
-      <button type="submit">Submit</button>
+
+    <form 
+      id="file-form"
+      onSubmit={submit} 
+    >
+      <input
+        id="file-upload"
+        type="file"
+        name="file"
+        onChange={e => setFile(e.target.files[0])}
+      />
+      
+      <button
+      id='display-btn'
+      type="submit">
+        Submit
+      </button>
+
     </form>
   );
 };

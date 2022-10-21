@@ -39,11 +39,15 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
     <div className='doc-editor'>
       {openPicker && <FilePicker fileList={fileList} setDocument={setDocument} />}
 
-      {hostView && !openPicker && <Button onClick={() => connectAuth()}>
-      Document Manager
-      </Button>}
+      <h1 className = 'file-manager'>
+        Upload your files
+      </h1>
       
       <FileUpload updateRoom={updateRoom}/>
+      
+      <h1 className = 'file-manager'>
+        Manage your uploaded files
+      </h1>
       <Dropdown 
         setActiveDocumentHandler={setActiveDocumentHandler}
         documents={documents}

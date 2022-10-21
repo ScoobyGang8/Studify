@@ -26,7 +26,7 @@ function Dropdown ({documents, setActiveDocumentHandler, deleteFile}) {
 
   return (    
     <div>
-      <label htmlFor="file-selector"> Choose a file to upload: </label>
+      {/*<label htmlFor="file-selector"> Choose a file to upload: </label>*/}
 
       <select
         name="user-files"
@@ -34,7 +34,7 @@ function Dropdown ({documents, setActiveDocumentHandler, deleteFile}) {
         onChange={(e) => setSelectedDocument(e.target.value)}>
         <option
           className="fileOptions"
-          value="">---Please Choose an Option--
+          value="">---Please Choose a File--
         </option>
         {Object.entries(filesHash)?.map(pair => <option className="fileOptions" key={pair[1]} value={pair[1]}>{pair[0]}</option>)}
       </select>

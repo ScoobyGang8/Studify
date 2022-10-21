@@ -156,9 +156,25 @@ function Room( ) {
         setActiveDocumentHandler={setActiveDocumentHandler}
         updateRoom={fetchRoomInfo}
         deleteFile = {deleteFile}
-      />}
-      {(activeDocument && activeURL) && <SelectedDocument document={activeDocument} activeURL={activeURL}/>}
-      <Chatbox roomId={info._id} socket={socket} nickname={hostInfo.nickname}/>
+      />
+      }
+      <div className='docAndChatArea'>
+
+        {(activeDocument && activeURL) &&
+          <SelectedDocument
+            document={activeDocument}
+            activeURL={activeURL}
+          />
+        }
+
+        <Chatbox
+          roomId={info._id}
+          socket={socket}
+          nickname={hostInfo.nickname}
+        />
+
+      </div>
+
     </div>
   );
 }

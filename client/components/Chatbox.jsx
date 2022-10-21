@@ -26,19 +26,35 @@ function Chatbox({ roomId, socket, nickname }) {
 
   return (
     <div className='chatbox'>
+      <h1 className='file-manager'>Chat Area</h1>
+      
       <div id='message-container'>
         {messages}
       </div>
+
       <form onSubmit={(e) => {
         e.preventDefault();
         console.log(e.target[0].value);
         sendMsg(e.target[0].value);
         e.target[0].value = '';
       }}>
-        <input type='text'></input>
-        <Button type='submit' variant='text'>Send</Button>
+        <input
+          id = 'input-text'
+          type='text'
+          
+        >
+        </input>
+        
+        <Button
+          id = 'chat-btn'
+          type='submit'
+          variant='text'
+        >
+          Send
+        </Button>
       </form>
-    </div>
+    
+      </div>
   );
 }
 

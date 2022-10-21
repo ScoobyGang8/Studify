@@ -24,9 +24,9 @@
 //   display: none;
 // }
 
-#file-form{
+.file-form{
   display: flex;
-  width: 50%;
+  width: 100%;
   justify-content: space-between;
   margin-left: 8px;
   margin-right: 8px;
@@ -99,6 +99,31 @@ h1.file-manager{
   color: red;
 }
 
-.iframe {
+.docAndChatArea {
+  display: flex;
+}
+
+.chatbox {
+  padding: 10px;
   
+
+}
+
+#chat-btn {
+  border: 1px solid $mui-text-color;
+  margin-top: 5px;
+  padding: 1px;
+}
+
+#input-text {
+  color: gray;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#file-upload {
+  content: 'select a file';
+  width: 100%;
 }

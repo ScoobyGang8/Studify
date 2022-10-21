@@ -23,7 +23,7 @@ const FileUpload = ({ updateRoom }) => {
   return (
 
     <form 
-      id="file-form"
+      className="file-form"
       onSubmit={submit} 
     >
       <input

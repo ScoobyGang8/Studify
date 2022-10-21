@@ -25,7 +25,7 @@ function Dropdown ({documents, setActiveDocumentHandler, deleteFile}) {
   console.log('DROPDOWN SELECTED DOC ', selectedDocument);
 
   return (    
-    <div>
+    <div className='file-form'>
       {/*<label htmlFor="file-selector"> Choose a file to upload: </label>*/}
 
       <select
@@ -39,19 +39,20 @@ function Dropdown ({documents, setActiveDocumentHandler, deleteFile}) {
         {Object.entries(filesHash)?.map(pair => <option className="fileOptions" key={pair[1]} value={pair[1]}>{pair[0]}</option>)}
       </select>
 
-      <Button 
-        id="display-btn"
-        variant="contained"
-        onClick={() => setActiveDocumentHandler(selectedDocument)}>
-        Display
-      </Button>
-      
-      <Button
-        id="delete-btn" 
-        onClick = {() => deleteFile(selectedDocument)}>
-        Delete
-      </Button>
-
+      <div>
+        <Button 
+          id="display-btn"
+          variant="contained"
+          onClick={() => setActiveDocumentHandler(selectedDocument)}>
+          Display
+        </Button>
+        
+        <Button
+          id="delete-btn" 
+          onClick = {() => deleteFile(selectedDocument)}>
+          Delete
+        </Button>
+      </div>
     </div>
 
     

@@ -21,8 +21,8 @@ function RoomCard( { info, id } ) {
   console.log('ROOM CARD INFO ', info);
   async function saveRoom () {
     const options = {
-      method: 'PATCH', 
-      headers: {'Content-Type': 'application/json'}, 
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({savedRoom: id})};
     const saved = await fetch('/api/users/saveroom', options).then(response => response.json());
 
@@ -57,7 +57,7 @@ function RoomCard( { info, id } ) {
       {/* <div>
           <img src='https://csunshinetoday.csun.edu/wp-content/uploads/Math4-web.jpg' width="192" height="144"/>
         </div> */}
-      {info.host.nickname} Room
+      {info?.host?.nickname} Room
       {/* <InfoIcon fontSize="small" onClick={showRoomInfo}></InfoIcon> */}
       {/* </div> */}
       {/* <form>
@@ -70,9 +70,9 @@ function RoomCard( { info, id } ) {
 
   const roomInfo = (
     <div className="roomInfo">
-      <p><span>Subject:  </span>{info.subject.toUpperCase()} </p>
-      <p><span>Creator:  </span>{info.host.username} </p>
-      <p><span>People Inside: </span>{info.allowedUsers} </p>
+      <p><span>Subject:  </span>{info?.subject?.toUpperCase()} </p>
+      <p><span>Creator:  </span>{info?.host?.username} </p>
+      <p><span>People Inside: </span>{info?.allowedUsers} </p>
       <div id='main-button'>
         <Link to='/main/room' state={{ info }}><Button variant='contained'>Join Room</Button></Link>
         {!saved && <Button variant='contained' id="saveMyRoom" onClick={saveRoom}>Save</Button>}

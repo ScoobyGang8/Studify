@@ -24,7 +24,7 @@ function ProfileRoomCard({ fetchUser, info, files, setRoomCookie, roomId }) {
   useEffect(() => {
     info['files'] = files;
   }, [info, files]);
-    
+
   return (
     <div className='profile-room'>
       <p><label>Subject: </label>{info.subject}</p>
@@ -33,7 +33,10 @@ function ProfileRoomCard({ fetchUser, info, files, setRoomCookie, roomId }) {
       {/* <Link to='/main/room' state={{ info }}> */}
         <Button variant='contained' id="open-room-btn" onClick={() => {
         setRoomCookie(roomId);
-        setTimeout(() => navigate('/main/room'), 500);
+        // setTimeout(() => navigate('/main/room'), 1000);
+        navigate('/main/room');
+        window.location.reload();
+
       }}>Open Room</Button>
       {/* </Link> */}
 
@@ -44,8 +47,8 @@ function ProfileRoomCard({ fetchUser, info, files, setRoomCookie, roomId }) {
         Edit Room
       </Button>
 
-      <Button 
-        id="delete-room-btn" 
+      <Button
+        id="delete-room-btn"
         onClick={() => deleteRoom(info._id)}>
         Delete Room
       </Button>

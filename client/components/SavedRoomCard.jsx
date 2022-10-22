@@ -31,9 +31,12 @@ export default function SavedRoomCard({fetchUser, info, id, setRoomCookie, roomI
       {/* <Link to={'/main/room'} state={{info}}> */}
       <Button variant='contained' id="joinRoom" onClick={() => {
         setRoomCookie(roomId);
-        setTimeout(() => {
-          navigate('/main/room');
-        }, 500);
+        // setTimeout(() => {
+        //   navigate('/main/room');
+        // }, 1000);
+        // window.location.reload();
+        navigate('/main/room');
+        window.location.reload();
       }}>Join Room</Button>
       {/* </Link> */}
       <Button variant='outlined' id="removeMyRoom" onClick={deleteSavedRoom}>Remove</Button>

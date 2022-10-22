@@ -148,6 +148,7 @@ function Room( ) {
     <div className="room-page">
       <div id='room-page-info'>
         <h2>Host: {info?.host && (info?.host?.nickname || hostInfo.nickname)} </h2>
+        <p>Subject: {info?.subject}</p>
       </div>
       {hostView && 
       <DocumentEditor 

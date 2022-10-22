@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button } from '@mui/material';
 
 const FileUpload = ({ updateRoom }) => {
   const [file, setFile] = useState(null);
@@ -24,6 +25,7 @@ const FileUpload = ({ updateRoom }) => {
 
     <form 
       className="file-form"
+      id='file-upload-form'
       onSubmit={submit} 
     >
       <input
@@ -33,11 +35,12 @@ const FileUpload = ({ updateRoom }) => {
         onChange={e => setFile(e.target.files[0])}
       />
       
-      <button
-      id='display-btn'
-      type="submit">
+      <Button
+        variant='contained'
+        id='display-btn'
+        type="submit">
         Submit
-      </button>
+      </Button>
 
     </form>
   );

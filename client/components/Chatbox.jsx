@@ -7,7 +7,9 @@ function Chatbox({ roomId, socket, nickname }) {
   // need function to retrieve messages
 
   const messages = messageList.map((e, i) => {
-    return (<p key={i}>{e.from}: {e.msg}</p>);
+    let self = false;
+    if (e.from === nickname) {self = true;}
+    return (<p data-self={self} key={i}>{e.from}: <span>{e.msg}</span></p>);
   });
 
   useEffect(()=> {
@@ -26,10 +28,11 @@ function Chatbox({ roomId, socket, nickname }) {
 
   return (
     <div className='chatbox'>
-      <h1 className='file-manager'>Chat Area</h1>
+      <h1 className='file-manager'>ROOM CHAT</h1>
       
       <div id='message-container'>
         {messages}
+        <div id='anchor'></div>
       </div>
 
       <form onSubmit={(e) => {

@@ -4,7 +4,7 @@ import FilePicker from './FilePicker';
 import FileUpload from './FileUpload';
 import Dropdown from './Dropdown';
 import SelectedDocument from './SelectedDocument';
-import { PropaneSharp } from '@mui/icons-material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateRoom, deleteFile}) {
   // some fake data for rendering purposes
@@ -13,6 +13,7 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
   const [openPicker, setPicker] = useState(false);
   const [fileList, setFiles] = useState(fakeFileList);
   const [document, setDocument] = useState({});
+  const [openEditor, setEditor] = useState(true);
 
 
   const connectAuth = async () => {
@@ -36,7 +37,7 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
   };
 
   return (
-    <div className='doc-editor'>
+    <div className='doc-editor' data-open={openEditor}>
       
       <h1 className = 'file-manager'>
       Upload your files
@@ -55,6 +56,10 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
         documents={documents}
         deleteFile={deleteFile}
       />
+
+      {openEditor ? 
+        <ExpandLess onClick={() => setEditor(false)}/>
+        : <ExpandMore onClick={() => setEditor(true)}/>}
     </div>
   );
 }

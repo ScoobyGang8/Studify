@@ -48,11 +48,14 @@ button:hover {
 }
 
 .main-nav {
+  position: fixed;
+  width: 100%;
   display: flex;
   align-items: center;
   background-color: $background-color;
   height: 50px;
   border-bottom: 1px solid $accent-color-light;
+  z-index: 1;
 }
 .main-nav-btn {
   margin: 0 10px;
@@ -78,6 +81,7 @@ button:hover {
 };
 
 #main-container {
+  margin-top: 50px;
   flex: 1;
   display: flex;
 }

@@ -39,7 +39,7 @@ function Dropdown ({documents, setActiveDocumentHandler, deleteFile}) {
         {Object.entries(filesHash)?.map(pair => <option className="fileOptions" key={pair[1]} value={pair[1]}>{pair[0]}</option>)}
       </select>
 
-      <div>
+      <div className='dropdown-btns'>
         <Button 
           id="display-btn"
           variant="contained"

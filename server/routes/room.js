@@ -33,6 +33,11 @@ router.patch('/update/:id',
   (req, res) => res.status(200).json({ message: 'Updated the Room info.' })
 );
 
+router.patch('/messages/:id', 
+  roomsController.updateMessages,
+  (req, res) => res.status(200).json({ updatedMessages: res.locals.updatedMessages })
+);
+
 router.get('/cookie',
   cookieController.getRoomCookie,
   roomsController.getRoom,

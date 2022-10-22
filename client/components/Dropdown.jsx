@@ -22,7 +22,7 @@ function Dropdown ({documents, setActiveDocumentHandler, deleteFile}) {
     }
   }, [documents]);
   
-  console.log('DROPDOWN SELECTED DOC ', selectedDocument);
+  // console.log('DROPDOWN SELECTED DOC ', selectedDocument);
 
   return (    
     <div className='file-form'>

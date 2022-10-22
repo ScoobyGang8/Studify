@@ -55,17 +55,21 @@ function Room( ) {
     //Check if the entered filename is empty or matches the current activeDocument
     if (!filename.trim().length || filename.trim() === activeDocument) return;
 
-    //Set the activeDocument and then fetch the file from aws bucket endpoint
-    await setActiveDocument(filename);
+    //emit new filename to all listeners in the room
+    socket.emit('set_filename', filename, info._id);
 
-    const awsFile = await fetch(`/api/uploads/${filename}`, {
-      credentials: 'include',
-    });
-    if (awsFile.ok){
-      const url = await awsFile.json();
-      console.log('url', url);
-      setActiveURL(url);
-    }
+    //Set the activeDocument and then fetch the file from aws bucket endpoint
+    // await setActiveDocument(filename);
+
+    // const awsFile = await fetch(`/api/uploads/${filename}`, {
+    //   credentials: 'include',
+    // });
+
+    // if (awsFile.ok){
+    //   const url = await awsFile.json();
+    //   console.log('url', url);
+    //   setActiveURL(url);
+    // }
   };
 
   //Fetches room information. Used when the component first mounts
@@ -100,11 +104,25 @@ function Room( ) {
   }, [info]);
 
   useEffect(() => {
+    //Create client side socket connection
     const newSocket = io('http://localhost:3000');
 
+    //On connect join the room id on server side
     newSocket.on('connect', () => {
       console.log('ROOM COMPONENT SOCKET ', newSocket.id);
       if (info._id) newSocket.emit('join_room', info._id);
+    });
+
+    //handler for when a host changes the active file of the room and the event is emitted back from the server
+    newSocket.on('updated_filename', async (filename) => {
+      setActiveDocument(filename);
+
+      await fetchFromS3(filename);
+    });
+
+    newSocket.on('clear_roomFile', () => {
+      setActiveDocument('');
+      setActiveURL('');
     });
 
     newSocket.on('connect_error',  (err) => {
@@ -120,15 +138,15 @@ function Room( ) {
   }, [info]);
 
   // console.log('ROOM COMPONENT STATE', state);
-  // console.log('ROOM COMPONENT INFO', info);
+  console.log('ROOM COMPONENT INFO', info);
   console.log('ROOM COMPONENT HOSTINFO', hostInfo);
   // console.log('ROOM COMPONENT HOST VIEW ', hostView);
 
   const deleteFile = async (selectedDocument) => {
     if (selectedDocument === activeDocument) {
-      setActiveDocument('');
-      setActiveURL('');
+      socket.emit('clear_file', (info._id));
     }
+
     const response = await fetch(`/api/uploads/${selectedDocument}`, {
       method: 'DELETE',
       headers: {
@@ -172,6 +190,7 @@ function Room( ) {
           roomId={info._id}
           socket={socket}
           nickname={hostInfo.nickname}
+          messages={info?.messages}
         />
 
       </div>

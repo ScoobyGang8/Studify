@@ -28,11 +28,26 @@ io.on('connection', (socket) => {
     socket.join(roomId);
 
   });
+
+  //When the client sends a new message in the room
   socket.on('send_message', (data, roomId) => {
     // collect roomid from frontend and emit to specific room
     console.log('send_message request received: ', data, roomId);
     io.in(roomId).emit('received_message', data);
   });
+
+  //When the client sets a new activeFile
+  socket.on('set_filename', (filename, roomId) => {
+
+    console.log('set_filename socket request: ', filename, roomId);
+    io.in(roomId).emit('updated_filename', filename);
+  });
+
+  socket.on('clear_file', roomId => {
+    console.log('clear_file socket request received for : ', roomId);
+    io.in(roomId).emit('clear_roomFile');
+  });
+
   socket.on('disconnect', () => {
     console.log(socket.id, ' disconnected');
   });

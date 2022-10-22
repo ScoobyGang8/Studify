@@ -182,8 +182,10 @@ roomsController.updateRoom = async (req, res, next) => {
     const { id } = req.params;
     const { subject, restricted, maxallowed, allowedUsers } = req.body;
 
-    const updatedRoom = await Room.findByIdAndUpdate(id, { subject, restricted, maxallowed, allowedUsers });
+    const updatedRoom = await Room.findByIdAndUpdate(id, { subject, restricted, maxallowed, allowedUsers }, {new: true});
     res.locals.updatedRoom = updatedRoom;
+
+    await redisClient.set(`getRoom${updatedRoom._id}`, JSON.stringify(updatedRoom));
 
     console.log('UPDATE ROOM CONTROLLER: ', updatedRoom);
 
@@ -192,6 +194,31 @@ roomsController.updateRoom = async (req, res, next) => {
     return next({
       log: 'roomsController.updateRoom' + err,
       message: { err: 'roomsController.updateRoom: ERROR: could not update room'}
+    });
+  }
+};
+
+roomsController.updateMessages = async (req, res, next) => {
+  try {
+    // Collect room information
+    const { id } = req.params;
+    const { messages } = req.body;
+
+    console.log('RoomsController updateMessages: ', messages);
+
+    const updatedRoom = await Room.findByIdAndUpdate(id, { messages: messages }, {new: true});
+    res.locals.updatedMessages = updatedRoom.messages;
+
+    await redisClient.set(`getRoom${updatedRoom._id}`, JSON.stringify(updatedRoom));
+
+    console.log('UPDATE ROOM CONTROLLER: ', updatedRoom);
+
+    return next();
+
+  } catch (err) {
+    return next({
+      log: 'roomsController.updateMessages ' + err,
+      message: { err: 'roomsController.updateMessages: ERROR: could not update room'}
     });
   }
 };

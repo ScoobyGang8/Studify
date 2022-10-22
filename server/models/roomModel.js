@@ -11,6 +11,12 @@ const roomSchema = new Schema({
   maxallowed: { type: Number, max: 6 },
   restricted: { type: Boolean, required: true },
   activeFile: { type: String },
+  messages: [
+    {
+      from: { type: String },
+      msg: { type: String } 
+    }
+  ]
 });
 
 const Room = mongoose.model('Room', roomSchema);

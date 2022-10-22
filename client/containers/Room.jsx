@@ -138,7 +138,7 @@ function Room( ) {
   }, [info]);
 
   // console.log('ROOM COMPONENT STATE', state);
-  // console.log('ROOM COMPONENT INFO', info);
+  console.log('ROOM COMPONENT INFO', info);
   console.log('ROOM COMPONENT HOSTINFO', hostInfo);
   // console.log('ROOM COMPONENT HOST VIEW ', hostView);
 
@@ -176,7 +176,7 @@ function Room( ) {
         deleteFile = {deleteFile}
       />}
       {(activeDocument && activeURL) && <SelectedDocument document={activeDocument} activeURL={activeURL}/>}
-      <Chatbox roomId={info._id} socket={socket} nickname={hostInfo.nickname}/>
+      <Chatbox roomId={info._id} socket={socket} nickname={hostInfo.nickname} messages={info?.messages}/>
     </div>
   );
 }

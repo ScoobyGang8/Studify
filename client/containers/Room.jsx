@@ -166,6 +166,7 @@ function Room( ) {
     <div className="room-page">
       <div id='room-page-info'>
         <h2>Host: {info?.host && (info?.host?.nickname || hostInfo.nickname)} </h2>
+        <p>Subject: {info?.subject}</p>
       </div>
       {hostView && 
       <DocumentEditor 
@@ -174,9 +175,26 @@ function Room( ) {
         setActiveDocumentHandler={setActiveDocumentHandler}
         updateRoom={fetchRoomInfo}
         deleteFile = {deleteFile}
-      />}
-      {(activeDocument && activeURL) && <SelectedDocument document={activeDocument} activeURL={activeURL}/>}
-      <Chatbox roomId={info._id} socket={socket} nickname={hostInfo.nickname} messages={info?.messages}/>
+      />
+      }
+      <div className='docAndChatArea'>
+
+        {(activeDocument && activeURL) &&
+          <SelectedDocument
+            document={activeDocument}
+            activeURL={activeURL}
+          />
+        }
+
+        <Chatbox
+          roomId={info._id}
+          socket={socket}
+          nickname={hostInfo.nickname}
+          messages={info?.messages}
+        />
+
+      </div>
+
     </div>
   );
 }

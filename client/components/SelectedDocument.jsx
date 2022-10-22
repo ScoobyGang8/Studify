@@ -9,8 +9,9 @@ function SelectedDocument ({ activeURL, document }){
     <div className="doc-container">
       <h1 className="doc-header">{document.replace(/.*?_/, '').replace(/\.[^/.]+$/, '')}</h1>
       {activeURL && <iframe
+        className='iframe'
         src={activeURL} 
-        height="1000px"
+        height="500px"
         width="auto"
         align="center"/>}
     </div>  

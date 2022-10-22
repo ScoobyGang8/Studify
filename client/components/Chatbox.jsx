@@ -7,7 +7,9 @@ function Chatbox({ roomId, socket, nickname, messages }) {
   // need function to retrieve messages
 
   const activeMessages = messageList?.map((e, i) => {
-    return (<p key={i}>{e.from}: {e.msg}</p>);
+    let self = false;
+    if (e.from === nickname) {self = true;}
+    return (<p data-self={self} key={i}>{e.from}: <span>{e.msg}</span></p>);
   });
 
   const sendMsg = (message) => {
@@ -43,9 +45,12 @@ function Chatbox({ roomId, socket, nickname, messages }) {
 
   return (
     <div className='chatbox'>
+      <h1 className='file-manager'>ROOM CHAT</h1>
+      
       <div id='message-container'>
         {activeMessages}
       </div>
+
       <form onSubmit={(e) => {
         e.preventDefault();
         if (e.target[0].value.trim().length > 0) {
@@ -57,9 +62,22 @@ function Chatbox({ roomId, socket, nickname, messages }) {
         }
         e.target[0].value = '';
       }}>
-        <input type='text'></input>
-        <Button type='submit' variant='text'>Send</Button>
+        <input
+          id = 'input-text'
+          type='text'
+          
+        >
+        </input>
+        
+        <Button
+          id = 'chat-btn'
+          type='submit'
+          variant='text'
+        >
+          Send
+        </Button>
       </form>
+    
     </div>
   );
 }

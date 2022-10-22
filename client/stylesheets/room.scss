@@ -1,16 +1,36 @@
 .room-page {
-  margin: 50px auto;
+  margin: 80px auto;
   padding: 20px;
   width: 90%;
   background-color: $card-background;
   border-radius: $border-radius;
 }
+#room-page-info {
+  padding: 10px;
+  h2 {
+    padding: 5px 0;
+  }
+}
 .doc-editor {
-  margin: 30px;
+  position: relative;
+  height: 200px;
+  margin: 20px 30px;
   padding: 20px;
   border: 1px solid $accent-color-light;
   background-color: white;
+  overflow: hidden;
+  transition: all 0.5s;
+  svg {
+    color: $accent-color;
+    position: absolute;
+    top: 15px;
+    right: 10px
+  }
+  &[data-open='false'] {
+    height: 55px;
+  }
 }
+
 .file-picker {
   input {
     width: 300px;
@@ -24,34 +44,34 @@
 //   display: none;
 // }
 
-#file-form{
+.file-form{
   display: flex;
-  width: 20%;
-  justify-content: space-between;
+  width: 100%;
+  align-items: center;
   margin-left: 8px;
   margin-right: 8px;
   margin-bottom: 10px;
+  select{
+    text-align-last: center;
+    width: 300px;
+    height: 30px;
+    border-radius: $border-radius;
+  }
 }
 
-select{
-  text-align-last: center;
-  width: 300px;
-  height: 30px;
-  border: 1px blue solid;
-  border-radius: 5px;
-}
+
 
 .doc-container {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin: 30px;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 30px;
   padding-bottom: 50px;
-  border: 1px solid $mui-text-color;
+  border: 1px solid $accent-color;
   background-color: white;
+  width: 100%;
 }
 
 .doc-container iframe {
@@ -64,24 +84,106 @@ h1.doc-header{
   margin-bottom: 20px;
 }
 
-#display-btn {
-  align-self: center;
-  width: 75px;
-  height: 30px;
+h1.file-manager{
+  font-size: 1em;
+  color: $accent-color;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+
+// #display-btn {
+//   align-self: center;
+//   width: 75px;
+//   height: 30px;
+//   margin-left: 20px;
+//   margin-right: 10px;
+//   background-color: $mui-text-color;
+//   color: white;
+//   text-transform: uppercase;
+//   border: none;
+//   box-shadow: .5em .5em;
+//   a {
+//     width: 100%;
+//     color: white;
+//   }
+// }
+.dropdown-btns {
   margin-left: 20px;
-  margin-right: 10px;
-  a {
-    width: 100%;
-    color: white;
-  }
 }
 
 #delete-btn {
   align-self: center;
-  width: 75px;
-  height: 30px;
   margin-left: 10px;
   margin-right: 10px;
   border: red 1px solid;
   color: red;
+}
+
+.docAndChatArea {
+  display: flex;
+  margin: 0 30px;
+}
+
+.chatbox {
+  width: 350px;
+  padding: 0 10px;
+  margin-left: 10px;
+  h1 {
+    font-size: 24px;
+    color: $main-text-color;
+  }
+}
+#message-container {
+  overflow-anchor: none;
+  height: 300px;
+  overflow-y: scroll;
+  p {
+    display: flex;
+    flex-direction: column;
+    color: $mui-text-color;
+    margin: 10px 5px;
+    &[data-self='true'] {
+      text-align: right;
+      span {
+        align-self: end;
+        background-color: $accent-color;
+        color: white;
+      }
+     
+    }
+  }
+  span {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: white;
+    color: $main-text-color;
+    width: fit-content;
+    border-radius: 12px;
+  }
+}
+#anchor {
+  overflow-anchor: auto;
+  height: 1px;
+}
+
+#chat-btn {
+  border: 1px solid $mui-text-color;
+  margin-top: 5px;
+  padding: 1px;
+  float: right;
+}
+
+#input-text {
+  color: gray;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#file-upload-form {
+  button {
+    margin-left: 10px;
+  }
 }

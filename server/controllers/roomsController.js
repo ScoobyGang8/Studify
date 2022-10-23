@@ -74,11 +74,11 @@ roomsController.getRoom = async (req, res, next) => {
   try {
     let roomDoc;
     roomDoc = await redisGetOrSet(`getRoom${res.locals.roomId}`, async () => {
-      console.log('GET ROOM CONTROLLER DB QUERY');
+      
       return await Room.findById(res.locals.roomId).populate('host');
     });
     // gets room id from cookie
-    console.log('roomdoc', roomDoc);
+    console.log('GET ROOM CONTROLLER ROOM DOC ', roomDoc);
     res.locals.roomDoc = roomDoc;
     return next();
   } catch (err) {

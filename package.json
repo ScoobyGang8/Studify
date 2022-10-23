@@ -40,6 +40,7 @@
     "multer": "^1.4.5-lts.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-drive-picker": "^1.2.0",
     "react-router-dom": "^6.4.1",
     "redis": "^4.3.1",
     "socket.io": "^4.5.3",

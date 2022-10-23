@@ -175,6 +175,8 @@ function Room( ) {
         setActiveDocumentHandler={setActiveDocumentHandler}
         updateRoom={fetchRoomInfo}
         deleteFile = {deleteFile}
+        setActiveDocument={setActiveDocument}
+        setActiveURL={setActiveURL}
       />
       }
       <div className='docAndChatArea'>

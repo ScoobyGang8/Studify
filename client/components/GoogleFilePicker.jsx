@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import useDrivePicker from 'react-google-drive-picker';
-import Button from '@mui/material';
-
-import { oauth2Credentials } from '../../server/config';
-
+import Button from '@mui/material/Button';
+import { useCookies } from 'react-cookie';
 
 const GoogleFilePicker = () => {
 
-  const[openPicker, authResponse] = useDrivePicker();
+  const [openPicker, authResponse] = useDrivePicker();
+  const [cookies, setCookie, removeCookie] = useCookies(['O_AUTH_PLAIN']);
 
   const handleOpenPicker = () => {
     openPicker({
-      clientId: oauth2Credentials.client_id,
-      developerKey: oauth2Credentials.client_secret,
+      clientId: process.env.OAUTH_CLIENT_ID,
+      developerKey: process.env.OAUTH_API_KEY,
       viewId: 'DOCS',
       showUploadView: true,
       showUploadFolders: true,
@@ -21,6 +20,9 @@ const GoogleFilePicker = () => {
       callbackFunction: (data) => {
         if (data.action === 'cancel') console.log('Cancelled');
         console.log(data);
+
+        const url = data.docs[0].url;
+        const shareUrl = url.replace('drive_web', 'sharing');
       }
     });
   };
@@ -28,7 +30,6 @@ const GoogleFilePicker = () => {
   return (
     <div> 
       <Button variant='contained' onClick={() => handleOpenPicker()}>GOOGLE DRIVE</Button>
-        
     </div>
   );
 };

@@ -3,10 +3,10 @@ import { Button } from '@mui/material';
 import FilePicker from './FilePicker';
 import FileUpload from './FileUpload';
 import Dropdown from './Dropdown';
-import SelectedDocument from './SelectedDocument';
+import GoogleFilePicker from './GoogleFilePicker';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateRoom, deleteFile}) {
+function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateRoom, deleteFile, setActiveDocument, setActiveURL}) {
   // some fake data for rendering purposes
   const fakeFileList = ['test1', 'someDocument', 'my story'];
 
@@ -43,6 +43,7 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
       Upload your files
       </h1>
 
+      <GoogleFilePicker setActiveDocument={setActiveDocument} setActiveURL={setActiveURL}/>
       <FileUpload updateRoom={updateRoom}/>
       
       <h1 className = 'file-manager'>

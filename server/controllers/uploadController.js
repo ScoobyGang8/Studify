@@ -80,14 +80,7 @@ uploadController.getUserFiles = async(req, res, next) => {
     };
   
     const command = new GetObjectCommand(params);
-    //   const response = await s3.send(command).promise()
-    //     .then(res => {
-    //       return res.Body.toString('utf-8');
-    //     })
-    //     .catch(err => {
-    //       return err; 
-    //     });
-    // console.log('COMMAND OBJECT AFTER FILE RETIEVE',command);
+    
     res.locals.fileURL = await getSignedUrl(s3, command, { expiresIn: 36000 });
     res.locals.fileName = key;
     return next();

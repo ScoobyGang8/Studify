@@ -149,7 +149,6 @@ roomsController.deleteRoom = async (req, res, next) => {
     const roomDelete = await Room.findOneAndDelete({ _id });
     res.locals.deletedRoom = roomDelete;
     
-    console.log('Deleted Room: ', roomDelete);
     // updated host users rooms list
     const user = await User.findOneAndUpdate({ _id: roomDelete.host },
       { $pull: { rooms: _id } },
@@ -211,7 +210,7 @@ roomsController.updateMessages = async (req, res, next) => {
 
     await redisClient.set(`getRoom${updatedRoom._id}`, JSON.stringify(updatedRoom));
 
-    console.log('UPDATE ROOM CONTROLLER: ', updatedRoom);
+    console.log('UPDATE MESSAGES CONTROLLER: ', updatedRoom);
 
     return next();
 
@@ -230,7 +229,6 @@ roomsController.setActiveFile = async (req, res, next) => {
     // console.log('ROOM ID:',roomId)
     // grab fileName from req.params and set activefile in room doc
     const room = await Room.findByIdAndUpdate(roomId, {activeFile: fileName}, {new: true}).populate('host');
-    console.log(room);
     
     //update roomid query
     await redisClient.set(`getRoom${roomId}`, JSON.stringify(room));

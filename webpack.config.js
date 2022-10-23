@@ -1,5 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 const path = require('path');
+const { DefinePlugin } = require('webpack');
+
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   entry: './client/index.js',
@@ -12,6 +21,11 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx'],
+    fallback: {
+      'fs': false,
+      'os': false,
+      'path': false
+    } 
   },
   module: {
     rules: [
@@ -38,8 +52,9 @@ module.exports = {
       title: 'Development',
       template: 'index.html',
     }),
+    new webpack.DefinePlugin(envKeys)
   ],
-
+  devtool: 'eval-source-map',
   devServer: {
     static: {
       publicPath: '/build',

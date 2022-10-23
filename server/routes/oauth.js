@@ -4,39 +4,42 @@ const router = express.Router();
 ///////////////
 const { google } = require('googleapis');
 const jwt = require('jsonwebtoken');
-const OAuth2 = google.auth.OAuth2;
+
 const CONFIG = require('../config');
 
-const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
+const oauth2Client = new google.auth.OAuth2(
+  process.env.OAUTH_CLIENT_ID,
+  process.env.OAUTH_CLIENT_SECRET,
+  process.env.OAUTH_REDIRECT_URL
+);
 
 ///////////////
 
 router.get('/', (req, res) => {
 
-  const loginLink = oauth2Client.generateAuthUrl({
+  const oauthUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    prompt: 'consent',
     scope: CONFIG.oauth2Credentials.scopes,
-    include_granted_scopes: true
+    inclide_granted_scopes: true
   });
   // console.log(loginLink);
-  return res.status(200).json(loginLink);
+  return res.status(200).json(oauthUrl);
 });
 
-router.get('/auth_callback', async (req, res, next) => {
+router.get('/redirect', async (req, res, next) => {
   try {
 
     const { tokens } = await oauth2Client.getToken(req.query.code);
     oauth2Client.setCredentials(tokens);
 
+    console.log('OAUTH REDIRECT URL TOKENS: ', req.query.code);
+
     const jwt_token = jwt.sign(tokens.refresh_token, CONFIG.JWTsecret);
     // store on cookie
-    res.cookie('O_AUTH', jwt_token, {httpOnly: true});
+    res.cookie('O_AUTH', jwt_token, { httpOnly: true });
+    res.cookie('O_AUTH_PLAIN', tokens.refresh_token, { httpOnly: true });
 
     return res.redirect('http://localhost:8080/main/room');
-
-    // return res.redirect('/access_drive');
-
   } catch (e) {
     console.log(e.message);
     return (next);

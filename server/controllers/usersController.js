@@ -263,14 +263,14 @@ usersController.saveFile = async (req, res, next) => {
 usersController.deleteFile = async (req, res, next) => {
   try {
     const { fileName, user } = res.locals;
-    console.log('RES LOCALs', res.locals);
+    console.log('DELETE FILE RES LOCALS', res.locals);
     const response = await User.updateOne({ _id: user._id }, { $pull: { files: fileName } });
 
     const updatedUser = await User.findById(user._id);
 
     for await (const room of updatedUser.rooms) {
       const roomDoc = await Room.findById(room);
-      console.log(roomDoc);
+
       if (roomDoc.activeFile === fileName) roomDoc.activeFile = null;
       await roomDoc.save();
     }

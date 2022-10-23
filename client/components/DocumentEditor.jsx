@@ -6,7 +6,7 @@ import Dropdown from './Dropdown';
 import GoogleFilePicker from './GoogleFilePicker';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateRoom, deleteFile, setActiveDocument, setActiveURL}) {
+function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateRoom, deleteFile, setGoogleDoc}) {
   // some fake data for rendering purposes
   const fakeFileList = ['test1', 'someDocument', 'my story'];
 
@@ -43,7 +43,7 @@ function DocumentEditor({ hostView, documents, setActiveDocumentHandler, updateR
       Upload your files
       </h1>
 
-      <GoogleFilePicker setActiveDocument={setActiveDocument} setActiveURL={setActiveURL}/>
+      <GoogleFilePicker setGoogleDoc={setGoogleDoc}/>
       <FileUpload updateRoom={updateRoom}/>
       
       <h1 className = 'file-manager'>

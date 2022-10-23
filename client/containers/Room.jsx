@@ -58,18 +58,6 @@ function Room( ) {
     //emit new filename to all listeners in the room
     socket.emit('set_filename', filename, info._id);
 
-    //Set the activeDocument and then fetch the file from aws bucket endpoint
-    // await setActiveDocument(filename);
-
-    // const awsFile = await fetch(`/api/uploads/${filename}`, {
-    //   credentials: 'include',
-    // });
-
-    // if (awsFile.ok){
-    //   const url = await awsFile.json();
-    //   console.log('url', url);
-    //   setActiveURL(url);
-    // }
   };
 
   //Fetches room information. Used when the component first mounts
@@ -79,9 +67,13 @@ function Room( ) {
 
     if (response.status === 200) {
       const room = response.data;
-      console.log('Updated Room: ', room);
+      console.log('Fetched room info: ', room);
       setInfo(room);
     }
+  };
+
+  const setGoogleDoc = (docName, docURL) => {
+    socket.emit('updated_googleDoc', docName, docURL, info._id);
   };
 
   useEffect(()=>{
@@ -123,6 +115,11 @@ function Room( ) {
     newSocket.on('clear_roomFile', () => {
       setActiveDocument('');
       setActiveURL('');
+    });
+
+    newSocket.on('set_googleDoc', (docName, docURL) => {
+      setActiveDocument(docName);
+      setActiveURL(docURL);
     });
 
     newSocket.on('connect_error',  (err) => {
@@ -175,8 +172,7 @@ function Room( ) {
         setActiveDocumentHandler={setActiveDocumentHandler}
         updateRoom={fetchRoomInfo}
         deleteFile = {deleteFile}
-        setActiveDocument={setActiveDocument}
-        setActiveURL={setActiveURL}
+        setGoogleDoc={setGoogleDoc}
       />
       }
       <div className='docAndChatArea'>

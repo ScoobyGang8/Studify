@@ -43,6 +43,12 @@ io.on('connection', (socket) => {
     io.in(roomId).emit('updated_filename', filename);
   });
 
+  socket.on('updated_googleDoc', (filename, fileUrl, roomId) => {
+
+    console.log('update google doc socket request: ', filename, fileUrl);
+    io.in(roomId).emit('set_googleDoc', filename, fileUrl);
+  });
+
   socket.on('clear_file', roomId => {
     console.log('clear_file socket request received for : ', roomId);
     io.in(roomId).emit('clear_roomFile');

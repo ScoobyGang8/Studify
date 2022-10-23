@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useDrivePicker from 'react-google-drive-picker';
 import Button from '@mui/material/Button';
-import { useCookies } from 'react-cookie';
 
 const GoogleFilePicker = ({ setGoogleDoc }) => {
 
   const [openPicker, authResponse] = useDrivePicker();
-  const [cookies, setCookie, removeCookie] = useCookies(['O_AUTH_PLAIN']);
 
   const handleOpenPicker = () => {
     openPicker({

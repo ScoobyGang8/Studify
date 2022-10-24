@@ -63,6 +63,7 @@
     "@testing-library/user-event": "^14.4.3",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
+    "cypress": "^10.10.0",
     "eslint": "^8.24.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",

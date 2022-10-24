@@ -64,8 +64,8 @@ export default function Login({ setLoggedIn }) {
   const signupDetails = (
     <div className="auth-container  details-container">
       <h2 id="login-text">Signup Details</h2>
-      <TextField label="Username" onChange={(event) => setUsername(event.target.value)} />
-      <TextField label="Nickname" onChange={(event) => setNickname(event.target.value)} />
+      <TextField name="Username" label="Username" onChange={(event) => setUsername(event.target.value)} />
+      <TextField name="Nickname" label="Nickname" onChange={(event) => setNickname(event.target.value)} />
       <TextField type='password' placeholder='Must be at least 8 characters' label="Password"  onChange={(event) => setPassword(event.target.value)} />
       {warning && <p className='warning'>Please fill in all fields!</p>}
       

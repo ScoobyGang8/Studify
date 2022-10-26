@@ -19,7 +19,8 @@ function SubjectNav({ subject, setSubject }) {
       <Button variant='text'
         key={i}
         value={e[0]}
-        id='subject-links'
+        className='subject-links'
+        id={`${e[0]}subject-link`}
         onClick={(event) => handleClick(event.target.value)}>
         {e[1]}
         {e[0]}

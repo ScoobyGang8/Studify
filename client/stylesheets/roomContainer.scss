@@ -26,6 +26,14 @@
   padding: 10px;
 }
 
+button.subject-links {
+  margin: 10px 0;
+  justify-content: start;
+  &:hover {
+    background-color: $background-color-light
+  }
+}
+
 #subject-links {
   margin: 10px 0;
   justify-content: start;
@@ -33,6 +41,7 @@
     background-color: $background-color-light
   }
 }
+
 .subject-link-icon {
   margin-right: 10px;
 }

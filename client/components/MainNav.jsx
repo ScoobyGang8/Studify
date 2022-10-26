@@ -20,7 +20,7 @@ function MainNav({ setSubject, setLoggedIn }) {
       </Link>
       <Link className='main-nav-btn' to='/main/profile'><Button variant="text" id='profile-link'>Profile</Button></Link>
       <Link className='main-nav-btn' to='/main/settings'><Button variant="text" id='settings-link'>Settings</Button></Link>
-      <Link className='main-nav-btn' to='/' id='logout-link'><Button onClick={logOut} variant="text" id='logout-link' sx={{float: 'right'}}>Logout</Button></Link>
+      <Link className='main-nav-btn' to='/' id='logout-link'><Button onClick={logOut} variant="text" id='logout-link-button' sx={{float: 'right'}}>Logout</Button></Link>
     </div>
   );
 }

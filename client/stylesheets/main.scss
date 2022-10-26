@@ -70,7 +70,12 @@ button:hover {
     font-weight: 300;
   }
 }
-#logout-link {
+
+button#logout-link-button{
+  color: $warning-color;
+}
+
+#logout-link{
   color: $warning-color;
   flex: 1;
   justify-self: end;

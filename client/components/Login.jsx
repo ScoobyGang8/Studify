@@ -53,8 +53,8 @@ export default function Login({ setLoggedIn }) {
   const loginDetails = (
     <div className="auth-container details-container">
       <h2 id="login-text">Login Details</h2>
-      <TextField label="Username" onChange={(event) => setUsername(event.target.value)} />
-      <TextField type='password' label="Password" onChange={(event) => setPassword(event.target.value)} />
+      <TextField name="Username" label="Username" onChange={(event) => setUsername(event.target.value)} />
+      <TextField name="password" type='password' label="Password" onChange={(event) => setPassword(event.target.value)} />
       
       <Button onClick={logIn} variant="contained" id='auth-btn'>Login</Button>
       

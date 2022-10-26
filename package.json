@@ -7,7 +7,8 @@
     "dev": "nodemon server/server.js & webpack-dev-server --open",
     "windev": "concurrently \"nodemon server/server.js\" \"webpack-dev-server --open\"",
     "start": "nodemon server/server.js",
-    "test": "jest --verbose --detectOpenHandles --forceExit"
+    "test": "jest --verbose --detectOpenHandles --forceExit",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",

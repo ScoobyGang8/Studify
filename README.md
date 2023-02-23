@@ -39,11 +39,6 @@ After loading finishes you should now have access that file until you decide to 
 ### **Realtime Interaction** <br>
 Every room has a private live chat feature where active users can ask questions or post answers. Messages can be seen by every other person in the room. Similary, room owners can choose to share any file that they've uploaded to Studify's database or start a live editing session by connecting to their Google Drive
 
-<p align="center">
-  <img width="600" src=#> <br>
-</p>
-<br><br>
-
 # **Tech Stack**
 
 <table align="center" >

@@ -24,7 +24,7 @@ Currently in Alpha.
 Register an account with our application by entering a username and password, and you're good to go!
 
 <p align="center">
-  <img width="600" src=#> <br><br>
+  <img width="600" src=https://user-images.githubusercontent.com/3701668/220818823-f29f3ba3-5fb1-488c-8cc1-01fe81b155fa.gif> <br><br>
 </p>
 
 # **Features** <br>
